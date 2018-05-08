@@ -20,12 +20,16 @@ import com.demo.chenke.otherlib.customview.LoadingDialog;
  */
 public abstract class UIActivity extends AppCompatActivity implements BaseView {
     public LoadingDialog dialog;
+    private LinearLayout.LayoutParams params;
     private View contentView, statusView;
+    private LottieAnimationView mLoadingAnimation;
+    private View loadView, errorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         contentView = getLayoutInflater().inflate(setLayout(), null);
+        params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         setContentView(contentView);
         initStatusView();
         ActivityManager.getAppInstance().addActivity(this);//将当前activity添加进入管理栈
@@ -126,14 +130,8 @@ public abstract class UIActivity extends AppCompatActivity implements BaseView {
      */
     private void showStatus(int type) {
         if (statusView != null && statusView instanceof MultipleStatusView) {
-            LinearLayout.LayoutParams params;
-            LottieAnimationView mLoadingAnimation;
-            View loadView;
-            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            loadView = getLayoutInflater().inflate(R.layout.loading_view, null);
-            mLoadingAnimation = loadView.findViewById(R.id.loading_animation);
-            mLoadingAnimation.setAnimation("loading_bus.json");
-            mLoadingAnimation.loop(true);
+            createLoadingView();
+            createErrorView();
             if (statusView != null) {
                 switch (type) {
                     case BaseView.PAGE_LOGIN:
@@ -142,7 +140,7 @@ public abstract class UIActivity extends AppCompatActivity implements BaseView {
                         break;
                     case BaseView.PAGE_ERROR:
                         mLoadingAnimation.cancelAnimation();
-                        ((MultipleStatusView) statusView).showError();
+                        ((MultipleStatusView) statusView).showError(errorView, params);
                         break;
                     case BaseView.PAGE_NORMAL:
                         mLoadingAnimation.cancelAnimation();
@@ -150,6 +148,21 @@ public abstract class UIActivity extends AppCompatActivity implements BaseView {
                         break;
                 }
             }
+        }
+    }
+
+    private void createLoadingView() {
+        if (loadView == null) {
+            loadView = getLayoutInflater().inflate(R.layout.loading_view, null);
+            mLoadingAnimation = loadView.findViewById(R.id.loading_animation);
+            mLoadingAnimation.setAnimation("loading_bus.json");
+            mLoadingAnimation.loop(true);
+        }
+    }
+
+    private void createErrorView() {
+        if (errorView == null) {
+            errorView = getLayoutInflater().inflate(R.layout.error_view, null);
         }
     }
 }

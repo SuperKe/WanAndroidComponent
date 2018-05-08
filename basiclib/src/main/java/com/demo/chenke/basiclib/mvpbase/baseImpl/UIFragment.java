@@ -39,6 +39,7 @@ public abstract class UIFragment extends Fragment implements BaseView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(getLayout(), container, false);
+            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             initView();
         }
         return rootView;
@@ -135,7 +136,6 @@ public abstract class UIFragment extends Fragment implements BaseView {
         if (rootView != null) {
             if (statusView == null) {
                 statusView = rootView.findViewWithTag("statusView");
-                params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             }
             createLoadingView();
             createErrorView();
