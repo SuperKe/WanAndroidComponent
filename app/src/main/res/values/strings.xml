@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">YaGao</string>
+    <string name="nav_name_1">wanAndroid</string>
+    <string name="nav_name_2">搜藏</string>
+    <string name="nav_name_3">设置</string>
+    <string name="nav_name_4">关于我们</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <style name="CustomTitleTextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    //behavior
+    <string name="scale_down_show_behavior">com.demo.chenke.main.behavior.ScaleDownShowBehavior</string>
+</resources>

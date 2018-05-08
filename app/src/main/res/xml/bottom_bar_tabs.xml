@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@mipmap/main_home"
+        id="@+id/tab_1"
+        title="首页" />
+    <tab
+        icon="@mipmap/main_knowledge"
+        id="@+id/tab_2"
+        title="知识体系" />
+    <tab
+        icon="@mipmap/main_navigation"
+        id="@+id/tab_3"
+        title="导航" />
+    <tab
+        icon="@mipmap/main_project"
+        id="@+id/tab_4"
+        title="项目" />
+</tabs>

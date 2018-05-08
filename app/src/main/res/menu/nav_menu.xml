@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/other">
+        <item
+            android:id="@+id/nav_item_1"
+            android:checkable="true"
+            android:checked="true"
+            android:icon="@drawable/ic_wan_android"
+            android:title="@string/app_name" />
+
+        <item
+            android:id="@+id/nav_item_2"
+            android:checkable="true"
+            android:icon="@drawable/icon_like"
+            android:title="@string/my_collect" />
+
+        <item
+            android:id="@+id/nav_item_3"
+            android:checkable="true"
+            android:icon="@drawable/ic_setting"
+            android:title="@string/setting" />
+
+        <item
+            android:id="@+id/nav_item_4"
+            android:checkable="true"
+            android:icon="@drawable/ic_about"
+            android:title="@string/about_us" />
+    </group>
+</menu>

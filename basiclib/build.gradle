@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion project.ANDROID_COMPILE_SDK_VERSION as int
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion project.ANDROID_MIN_SDK_VERSION as int
+        targetSdkVersion project.ANDROID_TARGET_SDK_VERSION as int
+        versionCode project.APP_VERSION_CODE as int
+        versionName project.APP_VERSION_NAME
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api 'com.orhanobut:logger:2.2.0'
+    api 'com.google.code.gson:gson:2.8.2'
+    api 'io.reactivex.rxjava2:rxjava:2.1.1'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    //multidex
+    api "com.android.support:multidex:1.0.3"
+    api project(':otherlib')//第三方库文件，和自定义view均放在该lib中
+    api project(':basicres')//这里选择下沉basicres是因为base里面处理的加载视图(load，err，context等)）
+    api project(':commonlib')//阿里路由配置(可以配置其他),util工具类
+    //fragment管理
+    api "me.yokeyword:fragmentation:$rootProject.fragmentationVersion"
+    api "me.yokeyword:fragmentation-swipeback:$rootProject.fragmentationVersion"
+}
+//解决支持库版本不兼容问题
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '25.3.0'
+            }
+        }
+    }
+}
+

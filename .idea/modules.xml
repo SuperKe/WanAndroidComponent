@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://F:\YaGaoComponent-master\YaGao.iml" filepath="F:\YaGaoComponent-master\YaGao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YaGaoComponent-master.iml" filepath="$PROJECT_DIR$/YaGaoComponent-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basiclib/basiclib.iml" filepath="$PROJECT_DIR$/basiclib/basiclib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basicres/basicres.iml" filepath="$PROJECT_DIR$/basicres/basicres.iml" />
+      <module fileurl="file://$PROJECT_DIR$/build-gradle/build-gradle.iml" filepath="$PROJECT_DIR$/build-gradle/build-gradle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlib/commonlib.iml" filepath="$PROJECT_DIR$/commonlib/commonlib.iml" />
+      <module fileurl="file://F:\YaGaoComponent-master\componenttwo\componemttwo.iml" filepath="F:\YaGaoComponent-master\componenttwo\componemttwo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/componentfour/componentfour.iml" filepath="$PROJECT_DIR$/componentfour/componentfour.iml" />
+      <module fileurl="file://$PROJECT_DIR$/componentlib/componentlib.iml" filepath="$PROJECT_DIR$/componentlib/componentlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/componentone/componentone.iml" filepath="$PROJECT_DIR$/componentone/componentone.iml" />
+      <module fileurl="file://$PROJECT_DIR$/componentthree/componentthree.iml" filepath="$PROJECT_DIR$/componentthree/componentthree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/componenttwo/componenttwo.iml" filepath="$PROJECT_DIR$/componenttwo/componenttwo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/logincomponent/logincomponent.iml" filepath="$PROJECT_DIR$/logincomponent/logincomponent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/otherlib/otherlib.iml" filepath="$PROJECT_DIR$/otherlib/otherlib.iml" />
+    </modules>
+  </component>
+</project>

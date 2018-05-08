@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.demo.chenke.componentone">
+
+    <application>
+        <activity android:name=".activity.ArticleDetailActivity" />
+    </application>
+</manifest>
