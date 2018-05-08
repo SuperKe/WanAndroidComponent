@@ -24,6 +24,11 @@ import com.demo.chenke.otherlib.customview.LoadingDialog;
 public abstract class UIFragment extends Fragment implements BaseView {
     public LoadingDialog dialog;
     public Context context;
+    private MultipleStatusView statusView;
+    private LinearLayout.LayoutParams params;
+    private LottieAnimationView mLoadingAnimation;
+    private View loadView = null;
+    private View errView = null;
     private View rootView;
     private boolean isViewCreate = false;//view是否创建
     private boolean isViewVisible = false;//view是否可见
@@ -127,18 +132,13 @@ public abstract class UIFragment extends Fragment implements BaseView {
     }
 
     private void showStatus(int type) {
-        MultipleStatusView statusView = null;
-        LinearLayout.LayoutParams params = null;
-        LottieAnimationView mLoadingAnimation = null;
-        View loadView = null;
-        View errView = null;
         if (rootView != null) {
-            statusView = rootView.findViewWithTag("statusView");
-            params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            loadView = LayoutInflater.from(context).inflate(R.layout.loading_view, null);
-            mLoadingAnimation = loadView.findViewById(R.id.loading_animation);
-            mLoadingAnimation.setAnimation("loading_bus.json");
-            mLoadingAnimation.loop(true);
+            if (statusView == null) {
+                statusView = rootView.findViewWithTag("statusView");
+                params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            }
+            createLoadingView();
+            createErrorView();
         }
         if (statusView != null) {
             switch (type) {
@@ -148,7 +148,7 @@ public abstract class UIFragment extends Fragment implements BaseView {
                     break;
                 case BaseView.PAGE_ERROR:
                     mLoadingAnimation.cancelAnimation();
-                    statusView.showError();
+                    statusView.showError(errView, params);
                     break;
                 case BaseView.PAGE_NORMAL:
                     mLoadingAnimation.cancelAnimation();
@@ -156,6 +156,27 @@ public abstract class UIFragment extends Fragment implements BaseView {
                     break;
 
             }
+        }
+    }
+
+    /**
+     * 创建加载视图
+     */
+    private void createLoadingView() {
+        if (loadView == null) {
+            loadView = LayoutInflater.from(context).inflate(R.layout.loading_view, null);
+            mLoadingAnimation = loadView.findViewById(R.id.loading_animation);
+            mLoadingAnimation.setAnimation("loading_bus.json");
+            mLoadingAnimation.loop(true);
+        }
+    }
+
+    /**
+     * 创建错误视图
+     */
+    private void createErrorView() {
+        if (errView == null) {
+            errView = LayoutInflater.from(context).inflate(R.layout.error_view, null);
         }
     }
 
