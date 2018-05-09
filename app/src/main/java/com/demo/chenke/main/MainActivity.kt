@@ -63,11 +63,11 @@ class MainActivity : UIActivity(), NavigationView.OnNavigationItemSelectedListen
         }
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressedSupport() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            super.onBackPressedSupport()
         }
     }
 

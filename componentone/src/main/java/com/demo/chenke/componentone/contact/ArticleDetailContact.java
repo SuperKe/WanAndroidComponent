@@ -61,13 +61,13 @@ public interface ArticleDetailContact {
          *
          * @param msg 收藏结果
          */
-        void showCollectArticleResult(String msg);
+//        void showCollectArticleResult(String msg);
 
         /**
          * 取消搜藏结果处理
          *
          * @param msg 取消收藏结果
          */
-        void showCancelCollectArticleResult(String msg);
+//        void showCancelCollectArticleResult(String msg);
     }
 }

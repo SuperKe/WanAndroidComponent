@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.classic.common.MultipleStatusView;
@@ -16,16 +17,18 @@ import com.demo.chenke.basiclib.mvpbase.BaseView;
 import com.demo.chenke.basiclib.utils.RouterUtil;
 import com.demo.chenke.otherlib.customview.LoadingDialog;
 
+import me.yokeyword.fragmentation.SupportFragment;
+
 /**
  * Created by chenke on 2018/5/4.
  * 这个fragment是抽象加载时的各种视图的view(loadingView,errorView)
  * 降低BaseFragment的侵入性
  */
-public abstract class UIFragment extends Fragment implements BaseView {
+public abstract class UIFragment extends SupportFragment implements BaseView {
     public LoadingDialog dialog;
     public Context context;
     private MultipleStatusView statusView;
-    private LinearLayout.LayoutParams params;
+    public LinearLayout.LayoutParams params;
     private LottieAnimationView mLoadingAnimation;
     private View loadView = null;
     private View errView = null;
@@ -177,6 +180,12 @@ public abstract class UIFragment extends Fragment implements BaseView {
     private void createErrorView() {
         if (errView == null) {
             errView = LayoutInflater.from(context).inflate(R.layout.error_view, null);
+            (errView.findViewById(R.id.error_reload_tv)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    reload();
+                }
+            });
         }
     }
 
@@ -198,6 +207,13 @@ public abstract class UIFragment extends Fragment implements BaseView {
     public abstract int getLayout();
 
     public abstract void initView();
+
+    /**
+     * 错误重连
+     */
+    protected void reload() {
+
+    }
 
     public View getRootView() {
         return rootView;

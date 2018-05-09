@@ -2,7 +2,7 @@ package com.demo.chenke.componentone
 
 import android.content.Context
 import android.widget.ImageView
-import com.demo.chenke.basiclib.utils.GlideUtil
+import com.demo.chenke.commonlib.utils.GlideUtil
 import com.youth.banner.loader.ImageLoader
 
 /**

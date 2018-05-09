@@ -2,7 +2,7 @@ package com.demo.chenke.basiclib.mvpbase.baseImpl;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -14,11 +14,13 @@ import com.demo.chenke.basiclib.mvpbase.BaseView;
 import com.demo.chenke.basiclib.utils.ActivityManager;
 import com.demo.chenke.otherlib.customview.LoadingDialog;
 
+import me.yokeyword.fragmentation.SupportActivity;
+
 /**
  * 视图基类activity的抽象
  * 处理状态视图和dialog
  */
-public abstract class UIActivity extends AppCompatActivity implements BaseView {
+public abstract class UIActivity extends SupportActivity implements BaseView {
     public LoadingDialog dialog;
     private LinearLayout.LayoutParams params;
     private View contentView, statusView;
@@ -29,10 +31,10 @@ public abstract class UIActivity extends AppCompatActivity implements BaseView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         contentView = getLayoutInflater().inflate(setLayout(), null);
-        params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         setContentView(contentView);
-        initStatusView();
         ActivityManager.getAppInstance().addActivity(this);//将当前activity添加进入管理栈
+        params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        initStatusView();
         initView();
     }
 
@@ -47,6 +49,12 @@ public abstract class UIActivity extends AppCompatActivity implements BaseView {
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+    }
+
+    protected void setToolBar(Toolbar toolBar, CharSequence title) {
+        toolBar.setTitle(title);
+        setSupportActionBar(toolBar);
+        assert getSupportActionBar() != null;
     }
 
     /**
@@ -113,6 +121,13 @@ public abstract class UIActivity extends AppCompatActivity implements BaseView {
      * @return
      */
     public abstract int setLayout();
+
+    /**
+     * 网络错误重连
+     */
+    protected void reload() {
+
+    }
 
     /**
      * 这里每个初始化的activity都会获取statusView

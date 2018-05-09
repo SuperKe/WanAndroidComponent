@@ -73,6 +73,8 @@ ext {
     agentwebVersion = '4.0.2'
     //Test dependencies
     junitVersion = '4.12'
+    //eventBus
+    eventBusVersion='3.1.1'
 
 }
 task clean(type: Delete) {

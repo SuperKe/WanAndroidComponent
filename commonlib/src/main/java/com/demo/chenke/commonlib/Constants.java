@@ -64,6 +64,7 @@ public class Constants {
      * Avoid double click time area
      */
     public static final long CLICK_TIME_AREA = 1000;
+    public static final String ARTICLE_POSITION = "article_position";
     public static final String ARTICLE_LINK = "article_link";
     public static final String ARTICLE_TITLE = "article_title";
     public static final String ARTICLE_ID = "article_id";

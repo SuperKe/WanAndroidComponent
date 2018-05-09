@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/WanAndroidComponent.iml" filepath="$PROJECT_DIR$/WanAndroidComponent.iml" />
       <module fileurl="file://F:\YaGaoComponent-master\YaGao.iml" filepath="F:\YaGaoComponent-master\YaGao.iml" />
-      <module fileurl="file://$PROJECT_DIR$/YaGaoComponent-master.iml" filepath="$PROJECT_DIR$/YaGaoComponent-master.iml" />
+      <module fileurl="file://C:\Users\chenke\Desktop\WanAndroidComponent\YaGaoComponent-master.iml" filepath="C:\Users\chenke\Desktop\WanAndroidComponent\YaGaoComponent-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/basiclib/basiclib.iml" filepath="$PROJECT_DIR$/basiclib/basiclib.iml" />
       <module fileurl="file://$PROJECT_DIR$/basicres/basicres.iml" filepath="$PROJECT_DIR$/basicres/basicres.iml" />

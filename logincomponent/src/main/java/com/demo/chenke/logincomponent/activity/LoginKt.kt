@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.login_kt.*
 
 @Route(path = "/login/login")
 class LoginKt : BaseActivity<LoginDataContact.presenter>(), LoginDataContact.view, LoginUiContact {
-
     override fun setLayout(): Int {
         return R.layout.login_kt
     }

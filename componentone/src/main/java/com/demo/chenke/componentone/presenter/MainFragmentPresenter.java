@@ -6,7 +6,6 @@ import com.demo.chenke.basiclib.BaseResponse;
 import com.demo.chenke.basiclib.mvpbase.BaseView;
 import com.demo.chenke.basiclib.mvpbase.baseImpl.BasePresenterImpl;
 import com.demo.chenke.basiclib.retroft.ExceptionHelper;
-import com.demo.chenke.basiclib.utils.RouterUtil;
 import com.demo.chenke.commonlib.Constants;
 import com.demo.chenke.componentone.bean.BannerData;
 import com.demo.chenke.componentone.bean.FeedArticleData;
@@ -142,9 +141,10 @@ public class MainFragmentPresenter extends BasePresenterImpl<MainDataContact.set
                 });
     }
 
-    public Bundle getArticleDetailActivityBundle(int id, String articleTitle, String articleLink, boolean isCollect, boolean isCollectPage, boolean isCommonSite) {
+    public Bundle getArticleDetailActivityBundle(int id,int position, String articleTitle, String articleLink, boolean isCollect, boolean isCollectPage, boolean isCommonSite) {
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.ARTICLE_ID, id);
+        bundle.putInt(Constants.ARTICLE_POSITION,position);
         bundle.putString(Constants.ARTICLE_TITLE, articleTitle);
         bundle.putString(Constants.ARTICLE_LINK, articleLink);
         bundle.putBoolean(Constants.IS_COLLECT, isCollect);

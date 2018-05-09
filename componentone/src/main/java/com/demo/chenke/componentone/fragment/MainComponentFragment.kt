@@ -1,6 +1,5 @@
 package com.demo.chenke.componentone.fragment
 
-import android.annotation.SuppressLint
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,10 +12,15 @@ import com.demo.chenke.componentone.bean.BannerData
 import com.demo.chenke.componentone.bean.FeedArticleData
 import com.demo.chenke.componentone.contact.MainDataContact
 import com.demo.chenke.componentone.presenter.MainFragmentPresenter
+import com.demo.chenke.otherlib.event.CollectEvent
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.youth.banner.Banner
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
 
 @Route(path = "/componentone/main_page")
 class MainComponentFragment : BaseFragment<MainFragmentPresenter>(), MainDataContact.setDataView {
@@ -29,9 +33,22 @@ class MainComponentFragment : BaseFragment<MainFragmentPresenter>(), MainDataCon
         return R.layout.fragment_item_list
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun getCollectEvent(event: CollectEvent) {
+        if (event.position > -1) {
+            adapter!!.data[event.position].isCollect = event.isCollect
+            adapter!!.notifyDataSetChanged()
+        }
+    }
+
     override fun initView() {
+        EventBus.getDefault().register(this)
         initSmartRefresh()
         initAdapter()
+        presenter.loadData()//获取数据
+    }
+
+    override fun reload() {
         presenter.loadData()//获取数据
     }
 
@@ -54,6 +71,11 @@ class MainComponentFragment : BaseFragment<MainFragmentPresenter>(), MainDataCon
         if (mBanner != null) {
             mBanner!!.stopAutoPlay()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun refreshUI(bannerList: MutableList<BannerData>, articleList: MutableList<FeedArticleData>) {
@@ -87,21 +109,24 @@ class MainComponentFragment : BaseFragment<MainFragmentPresenter>(), MainDataCon
         mBanner = banner.findViewById(R.id.head_banner)
         adapter!!.addHeaderView(banner)
         recylcer!!.adapter = adapter
-        adapter!!.setOnItemClickListener { adapter, view, position ->
+        adapter!!.setOnItemClickListener { adapter, _, position ->
             if (adapter.data.size <= 0 || adapter.data.size < position) {
                 return@setOnItemClickListener
             }
             startActivity("/componentone/article_detail", presenter.getArticleDetailActivityBundle(
-                    (adapter.data[position] as FeedArticleData).id,
+                    (adapter.data[position] as FeedArticleData).id, position,
                     (adapter.data[position] as FeedArticleData).title,
                     (adapter.data[position] as FeedArticleData).link,
-                    false, false, false
+                    (adapter.data[position] as FeedArticleData).isCollect, false, false
             ))
         }
-        adapter!!.setOnItemChildClickListener { _, view, position ->
+        adapter!!.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
-
+                R.id.item_search_pager_like_iv -> {
+                    (adapter.data[position] as FeedArticleData).isCollect = !(adapter.data[position] as FeedArticleData).isCollect
+                }
             }
+            adapter.notifyDataSetChanged()
         }
     }
 
@@ -146,10 +171,14 @@ class MainComponentFragment : BaseFragment<MainFragmentPresenter>(), MainDataCon
         mBanner!!.setIndicatorGravity(BannerConfig.CENTER)
         //banner的点击事件
         mBanner!!.setOnBannerListener {
-
+            startActivity("/componentone/article_detail", presenter.getArticleDetailActivityBundle(
+                    0, -1,
+                    mBannerTitleList[it],
+                    mBannerUrlList[it],
+                    false, false, true
+            ))
         }
         //banner设置方法全部调用完毕时最后调用
         mBanner!!.start()
     }
-
 }
