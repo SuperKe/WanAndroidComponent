@@ -1,27 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <com.classic.common.MultipleStatusView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/statusView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:tag="@string/status_view">
+    android:tag="statusView">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlPrimaryColor="@color/colorPrimary">
-
-        <com.scwang.smartrefresh.header.PhoenixHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground" />
+            android:background="@color/colorBackground"
+            android:scrollbars="none" />
 
         <com.scwang.smartrefresh.header.TaurusHeader
             android:layout_width="match_parent"

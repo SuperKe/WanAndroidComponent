@@ -27,13 +27,12 @@ import java.util.regex.Pattern;
 @SuppressWarnings("unused")
 public class StatusBarUtil {
 
+    public static final int MIN_API = 19;
     public static int DEFAULT_COLOR = 0;
-
     /**
      * Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 0.2f : 0.3f;
      */
     public static float DEFAULT_ALPHA = 0;
-    public static final int MIN_API = 19;
 
     //<editor-fold desc="沉侵">
     public static void immersive(Activity activity) {
@@ -100,7 +99,9 @@ public class StatusBarUtil {
         }
     }
 
-    /** 设置状态栏darkMode,字体颜色及icon变黑(目前支持MIUI6以上,Flyme4以上,Android M以上) */
+    /**
+     * 设置状态栏darkMode,字体颜色及icon变黑(目前支持MIUI6以上,Flyme4以上,Android M以上)
+     */
     public static void darkMode(Activity activity) {
         darkMode(activity.getWindow(), DEFAULT_COLOR, DEFAULT_ALPHA);
     }
@@ -109,14 +110,16 @@ public class StatusBarUtil {
         darkMode(activity.getWindow(), color, alpha);
     }
 
-    /** 设置状态栏darkMode,字体颜色及icon变黑(目前支持MIUI6以上,Flyme4以上,Android M以上) */
+    /**
+     * 设置状态栏darkMode,字体颜色及icon变黑(目前支持MIUI6以上,Flyme4以上,Android M以上)
+     */
     public static void darkMode(Window window, int color, @FloatRange(from = 0.0, to = 1.0) float alpha) {
         if (isFlyme4Later()) {
             darkModeForFlyme4(window, true);
-            immersive(window,color,alpha);
+            immersive(window, color, alpha);
         } else if (isMIUI6Later()) {
             darkModeForMIUI6(window, true);
-            immersive(window,color,alpha);
+            immersive(window, color, alpha);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             darkModeForM(window, true);
             immersive(window, color, alpha);
@@ -139,7 +142,9 @@ public class StatusBarUtil {
 
     //------------------------->
 
-    /** android 6.0设置字体颜色 */
+    /**
+     * android 6.0设置字体颜色
+     */
     @RequiresApi(Build.VERSION_CODES.M)
     private static void darkModeForM(Window window, boolean dark) {
 //        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -207,14 +212,18 @@ public class StatusBarUtil {
         }
     }
 
-    /** 判断是否Flyme4以上 */
+    /**
+     * 判断是否Flyme4以上
+     */
     public static boolean isFlyme4Later() {
         return Build.FINGERPRINT.contains("Flyme_OS_4")
                 || Build.VERSION.INCREMENTAL.contains("Flyme_OS_4")
                 || Pattern.compile("Flyme OS [4|5]", Pattern.CASE_INSENSITIVE).matcher(Build.DISPLAY).find();
     }
 
-    /** 判断是否为MIUI6以上 */
+    /**
+     * 判断是否为MIUI6以上
+     */
     public static boolean isMIUI6Later() {
         try {
             Class<?> clz = Class.forName("android.os.SystemProperties");
@@ -230,14 +239,19 @@ public class StatusBarUtil {
     //</editor-fold>
 
 
-    /** 增加View的paddingTop,增加的值为状态栏高度 */
+    /**
+     * 增加View的paddingTop,增加的值为状态栏高度
+     */
     public static void setPadding(Context context, View view) {
         if (Build.VERSION.SDK_INT >= MIN_API) {
             view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
                     view.getPaddingRight(), view.getPaddingBottom());
         }
     }
-    /** 增加View的paddingTop,增加的值为状态栏高度 (智能判断，并设置高度)*/
+
+    /**
+     * 增加View的paddingTop,增加的值为状态栏高度 (智能判断，并设置高度)
+     */
     public static void setPaddingSmart(Context context, View view) {
         if (Build.VERSION.SDK_INT >= MIN_API) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
@@ -249,7 +263,9 @@ public class StatusBarUtil {
         }
     }
 
-    /** 增加View的高度以及paddingTop,增加的值为状态栏高度.一般是在沉浸式全屏给ToolBar用的 */
+    /**
+     * 增加View的高度以及paddingTop,增加的值为状态栏高度.一般是在沉浸式全屏给ToolBar用的
+     */
     public static void setHeightAndPadding(Context context, View view) {
         if (Build.VERSION.SDK_INT >= MIN_API) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
@@ -258,7 +274,10 @@ public class StatusBarUtil {
                     view.getPaddingRight(), view.getPaddingBottom());
         }
     }
-    /** 增加View上边距（MarginTop）一般是给高度为 WARP_CONTENT 的小控件用的*/
+
+    /**
+     * 增加View上边距（MarginTop）一般是给高度为 WARP_CONTENT 的小控件用的
+     */
     public static void setMargin(Context context, View view) {
         if (Build.VERSION.SDK_INT >= MIN_API) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
@@ -268,6 +287,7 @@ public class StatusBarUtil {
             view.setLayoutParams(lp);
         }
     }
+
     /**
      * 创建假的透明栏
      */
@@ -293,7 +313,9 @@ public class StatusBarUtil {
         return (color & 0x00ffffff) | (((int) (a * alpha)) << 24);
     }
 
-    /** 获取状态栏高度 */
+    /**
+     * 获取状态栏高度
+     */
     public static int getStatusBarHeight(Context context) {
         int result = 24;
         int resId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");

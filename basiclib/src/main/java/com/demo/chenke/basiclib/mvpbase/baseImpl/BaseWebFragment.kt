@@ -1,11 +1,9 @@
 package com.demo.chenke.basiclib.mvpbase.baseImpl
 
-import android.view.KeyEvent
 import android.webkit.WebSettings
 import com.demo.chenke.basiclib.R
 import com.demo.chenke.basiclib.utils.CommonUtils
 import com.just.agentweb.AgentWeb
-import android.widget.Toast
 
 
 abstract class BaseWebFragment : UIFragment() {
@@ -76,11 +74,6 @@ abstract class BaseWebFragment : UIFragment() {
     override fun onPause() {
         agentWeb!!.webLifeCycle.onPause()
         super.onPause()
-    }
-
-    override fun onResume() {
-        agentWeb!!.webLifeCycle.onResume()
-        super.onResume()
     }
 
     override fun onDestroyView() {

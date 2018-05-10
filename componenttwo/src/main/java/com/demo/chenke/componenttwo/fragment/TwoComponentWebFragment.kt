@@ -1,11 +1,11 @@
-package com.demo.chenke.componentone.fragment
+package com.demo.chenke.componenttwo.fragment
 
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.demo.chenke.basiclib.mvpbase.baseImpl.BaseWebFragment
 
-@Route(path = "/componentone/article_detail_web_view")
-class OneComponentArticleDetailFragment : BaseWebFragment() {
+@Route(path = "/componenttwo/web_fragment")
+class TwoComponentWebFragment : BaseWebFragment() {
     // TODO: Rename and change types of parameters
     private var url: String? = null
     private val ARG_URL = "url"

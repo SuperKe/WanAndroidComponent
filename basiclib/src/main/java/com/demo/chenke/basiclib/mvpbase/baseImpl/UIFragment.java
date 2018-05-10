@@ -3,12 +3,10 @@ package com.demo.chenke.basiclib.mvpbase.baseImpl;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.classic.common.MultipleStatusView;
@@ -27,15 +25,12 @@ import me.yokeyword.fragmentation.SupportFragment;
 public abstract class UIFragment extends SupportFragment implements BaseView {
     public LoadingDialog dialog;
     public Context context;
-    private MultipleStatusView statusView;
     public LinearLayout.LayoutParams params;
+    private MultipleStatusView statusView;
     private LottieAnimationView mLoadingAnimation;
     private View loadView = null;
     private View errView = null;
     private View rootView;
-    private boolean isViewCreate = false;//view是否创建
-    private boolean isViewVisible = false;//view是否可见
-    private boolean isFirst = true;//是否第一次加载
 
     @Nullable
     @Override
@@ -43,15 +38,8 @@ public abstract class UIFragment extends SupportFragment implements BaseView {
         if (rootView == null) {
             rootView = inflater.inflate(getLayout(), container, false);
             params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            initView();
         }
         return rootView;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        isViewCreate = true;
     }
 
     @Override
@@ -61,46 +49,9 @@ public abstract class UIFragment extends SupportFragment implements BaseView {
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        isViewVisible = isVisibleToUser;
-        if (isVisibleToUser && isViewCreate) {
-            visibleToUser();
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (isViewVisible) {
-            visibleToUser();
-        }
-    }
-
-    @Override
-    public void onDestroyView() {
-        isViewCreate = false;
-        super.onDestroyView();
-    }
-
-    /**
-     * 懒加载
-     * 让用户可见
-     * 第一次加载
-     */
-    protected void firstLoad() {
-
-    }
-
-    /**
-     * 懒加载
-     * 让用户可见
-     */
-    protected void visibleToUser() {
-        if (isFirst) {
-            firstLoad();
-            isFirst = false;
-        }
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        initView();
     }
 
     @Override

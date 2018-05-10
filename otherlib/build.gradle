@@ -38,4 +38,5 @@ dependencies {
     api "com.tbruyelle.rxpermissions2:rxpermissions:$rootProject.rxpermissionsVersion"
     api "com.orhanobut:logger:$rootProject.loggerVersion"
     api "org.greenrobot:eventbus:$rootProject.eventBusVersion"
+    api "com.flyco.tablayout:FlycoTabLayout_Lib:$rootProject.tablayoutVersion"
 }
