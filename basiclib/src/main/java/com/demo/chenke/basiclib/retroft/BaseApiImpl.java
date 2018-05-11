@@ -5,19 +5,20 @@ import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public abstract class BaseApiImpl<T> implements BaseApi {
+public abstract class BaseApiImpl implements BaseApi {
     private volatile static Retrofit retrofit = null;
+
+
     protected Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
     protected OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
+
 
     public BaseApiImpl(String baseUrl) {
         httpBuilder.addInterceptor(new LoggingInterceptor());//添加header
@@ -50,17 +51,6 @@ public abstract class BaseApiImpl<T> implements BaseApi {
             }
         }
         return retrofit;
-    }
-
-
-    @Override
-    public OkHttpClient.Builder setInterceptor(Interceptor interceptor) {
-        return httpBuilder.addInterceptor(interceptor);
-    }
-
-    @Override
-    public Retrofit.Builder setConverterFactory(Converter.Factory factory) {
-        return retrofitBuilder.addConverterFactory(factory);
     }
 
     /**

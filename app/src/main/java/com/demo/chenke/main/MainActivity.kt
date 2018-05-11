@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.app_toolbar.*
 class MainActivity : UIActivity(), NavigationView.OnNavigationItemSelectedListener {
     private var mainfragment: Fragment? = null
     private var twofragment: Fragment? = null
+    private var threefragmnet: Fragment? = null
     private var fragments: List<Fragment>? = null
     private var lastPosition = 0//记录上一个的position
     override fun setLayout(): Int {
@@ -38,7 +39,8 @@ class MainActivity : UIActivity(), NavigationView.OnNavigationItemSelectedListen
     private fun initFragments() {
         mainfragment = ARouter.getInstance().build("/componentone/main_page").navigation() as Fragment
         twofragment = ARouter.getInstance().build("/componenttwo/main_page").navigation() as Fragment
-        fragments = listOf(mainfragment, twofragment, mainfragment, twofragment).requireNoNulls()
+        threefragmnet = ARouter.getInstance().build("/componentthree/main_page").navigation() as Fragment
+        fragments = listOf(mainfragment, twofragment, threefragmnet, twofragment).requireNoNulls()
     }
 
 
