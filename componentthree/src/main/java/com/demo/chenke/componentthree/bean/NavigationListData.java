@@ -1,5 +1,7 @@
 package com.demo.chenke.componentthree.bean;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +12,9 @@ import java.util.List;
  */
 
 public class NavigationListData implements Serializable {
+    public static final int HEAD_TYPE = 1;
+    public static final int CONTENT_TYPE = 2;
+    private int type;
 
     /**
      * "articles": [],
@@ -44,4 +49,13 @@ public class NavigationListData implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
 }
